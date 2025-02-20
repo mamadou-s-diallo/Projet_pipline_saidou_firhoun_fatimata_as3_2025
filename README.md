@@ -16,3 +16,10 @@ Les données sont extraites tous les jours de l’API https://power.larc.nasa.go
 Dans cette partie, il est question d’identifier les problèmes liés à la base et de les corriger. Ici, il s’agit ici des types des variables et du formatage des caractères spéciaux. Cette partie a également été réalisée à partir d’un script python implémenté sur Amazon lambda.
 ## Chargement
 Le chargement a été fait sur Amazon S3.
+
+## Contenu du depot
+Le depot contient les fichiers suivants:
+--- "algorithme_collecte_transforme_chargement.py" qui contient les codes python implémentés dans la fonction lambda de AWS pour collecter, transformer et charger dans S3, les données chaque 24
+--- "african_region_with_coordinates.csv" qui contient la liste des régions avec leurs coordonnées geographiques
+--- "Methodologie.pdf" qui contient la methodologie de la construction du pipline
+--- "presentation_tall_saidou_ahmed.pptx" qui constiut le support de présentation
