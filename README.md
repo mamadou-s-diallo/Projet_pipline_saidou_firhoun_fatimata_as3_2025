@@ -27,4 +27,4 @@ Il contient la liste des régions avec leurs coordonnées geographiques
 ##### "Methodologie.pdf"
 Il contient la methodologie de la construction du pipline
 ##### "presentation_tall_saidou_ahmed.pptx"
-Il constiut le support de présentation
+Il consttitue le support de présentation
