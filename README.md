@@ -19,7 +19,12 @@ Le chargement a été fait sur Amazon S3.
 
 ## Contenu du depot
 Le depot contient les fichiers suivants:
---- "algorithme_collecte_transforme_chargement.py" qui contient les codes python implémentés dans la fonction lambda de AWS pour collecter, transformer et charger dans S3, les données chaque 24
---- "african_region_with_coordinates.csv" qui contient la liste des régions avec leurs coordonnées geographiques
---- "Methodologie.pdf" qui contient la methodologie de la construction du pipline
---- "presentation_tall_saidou_ahmed.pptx" qui constiut le support de présentation
+
+##### "algorithme_collecte_transforme_chargement.py" 
+Il contient les codes python implémentés dans la fonction lambda de AWS pour collecter, transformer et charger dans S3, les données chaque 24
+##### "african_region_with_coordinates.csv"
+Il contient la liste des régions avec leurs coordonnées geographiques
+##### "Methodologie.pdf"
+Il contient la methodologie de la construction du pipline
+##### "presentation_tall_saidou_ahmed.pptx"
+Il constiut le support de présentation
