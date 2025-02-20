@@ -1,4 +1,4 @@
-# Projet_pipline_saidou_firhoun_fatimata_as3_2025
+# Projet_pipeline_saidou_firhoun_fatimata_as3_2025
 # Mise en place d'un Pipeline ETL dans le cloud sur les données météorologiques en Afrique
  
 ## Description
