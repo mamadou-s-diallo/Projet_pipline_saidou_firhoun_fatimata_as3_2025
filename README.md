@@ -17,7 +17,7 @@ Dans cette partie, il est question d’identifier les problèmes liés à la bas
 ## Chargement
 Le chargement a été fait sur Amazon S3.
 
-## Contenu du depot
+## Contenu du dépôt
 Le depot contient les fichiers suivants:
 
 ##### "algorithme_collecte_transforme_chargement.py" 
