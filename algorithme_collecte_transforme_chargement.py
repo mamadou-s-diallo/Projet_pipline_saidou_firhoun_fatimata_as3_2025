@@ -17,6 +17,7 @@ import boto3
 import time
 from datetime import datetime,timedelta
 from io import StringIO
+import unicodedata
 
 def lambda_handler(event, context):
     # 📌 Paramètres API NASA POWER
@@ -133,10 +134,27 @@ def lambda_handler(event, context):
             print(f"❌ Erreur lors du téléchargement du fichier S3 : {e}")
             return pd.DataFrame()
 
+    def normaliser_texte(texte):
+        if isinstance(texte, str):
+            # Normalisation Unicode pour corriger les caractères spéciaux
+            texte = unicodedata.normalize('NFKD', texte)
+            # Supprimer les caractères non ASCII si nécessaire
+            texte = texte.encode('ascii', 'ignore').decode('utf-8')
+        return texte
+
 
     existing_df = load_s3_data() # Charger la derniere version de la base
     regions_df = pd.read_csv("data/african_regions_with_coordinates.csv",sep=';',decimal=".") # Importer les donnees sur les coordonnees geographiques
     df = fetch_all_data() # Collecte des donnees depuis l'API de la NASA
+
+    # Appliquer la normalisation sur toutes les colonnes de type texte
+    df = df.applymap(normaliser_texte)
+    
+    #Correction de la date
+    df['Date'] = df['Date'].astype(int)
+    df['Date'] = df['Date'].astype(str)
+    df['Date'] = pd.to_datetime(df['Date'], format='%Y%m%d')
+    print(df['Date'].head())
 
      #Fusionner les deux bases
     if not existing_df.empty and not df.empty:
