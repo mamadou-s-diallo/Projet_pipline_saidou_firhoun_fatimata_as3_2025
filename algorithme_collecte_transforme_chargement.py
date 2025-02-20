@@ -1,6 +1,5 @@
-
-###############################   Alogorithme de collecte de transformation et de stockage dans S3 #########################################
-###############################         Projet Big data et cloud computing AS3 2024/2525           ######################################
+###############################   Algorithme de collecte de transformation et de stockage dans S3 #########################################
+###############################         Projet Big data et Cloud Computing AS3 2024/2525           ######################################
 #                                  
 #                                                               
 ###############################                                Conçu par                           ######################################
@@ -8,20 +7,16 @@
 #  
 ###############################                          Mamadou Saidou Diallo                     ####################################
 ###############################                              Fatimata Tall                         ################################################
-###############################                      Ahmed Firhoune Oumarou Souleye                ######################################
-
+###############################                      Ahmed Firhoun Oumarou Souleye                ######################################
 
 import json
 import requests
-import psycopg2
 import pandas as pd
 import concurrent.futures
 import boto3
 import time
 from datetime import datetime,timedelta
-import unicodedata
 from io import StringIO
-import os
 
 def lambda_handler(event, context):
     # 📌 Paramètres API NASA POWER
@@ -93,13 +88,13 @@ def lambda_handler(event, context):
             print(f"❌ Erreur API pour {region_name}: {e}")
             return None
 
-    def fetch_all_data():  # Définition de la fonction `fetch_all_data` pour récupérer toutes les données
+    def fetch_all_data():  # Définition de la fonction fetch_all_data pour récupérer toutes les données
         data = []  # Initialisation d'une liste vide pour stocker les données récupérées
         batch_size = 10  # Définition de la taille du lot (batch) à 10 requêtes simultanées
-        total_regions = len(regions_df)  # Calcul du nombre total de régions dans le DataFrame `regions_df`
+        total_regions = len(regions_df)  # Calcul du nombre total de régions dans le DataFrame regions_df
 
-        for i in range(0, total_regions, batch_size):  # Boucle pour parcourir les régions par lots de `batch_size`
-            batch = regions_df.iloc[i:i+batch_size]  # Extraction d'un lot de régions à partir de `regions_df`
+        for i in range(0, total_regions, batch_size):  # Boucle pour parcourir les régions par lots de batch_size
+            batch = regions_df.iloc[i:i+batch_size]  # Extraction d'un lot de régions à partir de regions_df
             print(f"📡 Récupération du lot {i+1} à {min(i+batch_size, total_regions)}...")  # Affichage du lot en cours de traitement
 
             with concurrent.futures.ThreadPoolExecutor(max_workers=NUM_THREADS) as executor:  # Création d'un pool de threads pour exécuter les requêtes en parallèle
@@ -107,14 +102,14 @@ def lambda_handler(event, context):
                 for future in concurrent.futures.as_completed(futures):  # Boucle pour attendre la fin de chaque tâche
                     result = future.result()  # Récupération du résultat de la tâche terminée
                     if result:  # Vérification si le résultat n'est pas vide
-                        data.extend(result)  # Ajout des données récupérées à la liste `data`
+                        data.extend(result)  # Ajout des données récupérées à la liste data
 
             time.sleep(2)  # Pause de 2 secondes après chaque lot pour éviter la surcharge du serveur
 
         return pd.DataFrame(data)  # Retourne les données récupérées sous forme de DataFrame pandas
     
 
-    def save_to_s3(df):  # Définition de la fonction `save_to_s3` pour exporter un DataFrame sur Amazon S3
+    def save_to_s3(df):  # Définition de la fonction save_to_s3 pour exporter un DataFrame sur Amazon S3
         if df.empty:  # Vérifie si le DataFrame est vide
             print("⚠ Aucun résultat à sauvegarder sur S3.")  # Affiche un message d'avertissement si le DataFrame est vide
             return  # Sort de la fonction si le DataFrame est vide
@@ -157,5 +152,5 @@ def lambda_handler(event, context):
     print(f"✅ Extraction terminée avec succès ! {len(df)} lignes enregistrées sur {len(regions_df)} régions.")
     return {
         'statusCode': 200,
-        'body': json.dumps(f'Successfully loaded')
+        'body': json.dumps(f'Hello from Lambda')
     }
